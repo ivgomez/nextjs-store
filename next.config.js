@@ -1,7 +1,6 @@
 module.exports = {
   exportTrailingSlash: true,
-  exportPathMap: function () {
-    defaultPathMap, { dev, src, outDir };
+  exportPathMap: async function (defaultPathMap, { dev, src, outDir }) {
     return {
       "/": { page: "/" },
     };
