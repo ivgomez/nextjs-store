@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { connect } from "react-redux";
-import { getProductsAction } from "../redux/product.action";
+import { getProductsAction, productRedeemAction } from "../redux/product.action";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -15,7 +15,7 @@ import Paper from "@material-ui/core/Paper";
 import { ModalComponent } from "../components/ModalComponent";
 
 const Index = (props) => {
-  const { isLoading, data, getProductsAction, products } = props;
+  const { isLoading, getProductsAction, productRedeemAction, products } = props;
   const [open, setOpen] = useState(false);
   const [product, setProduct] = useState({});
   const classes = useStyles();
@@ -28,19 +28,18 @@ const Index = (props) => {
     setOpen(!open);
   };
 
-  console.log(products);
   return (
     <div className="container">
       <Head>
         <title>Store</title>
       </Head>
-      <Typography paragraph>
+      <div>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Grid container justify="center" spacing={5}>
               {products &&
-                products.map((product) => (
-                  <Grid item>
+                products.map((product, idx) => (
+                  <Grid item key={idx}>
                     <Paper className={classes.paper}>
                       <Card className={classes.root}>
                         <CardActionArea>
@@ -55,14 +54,14 @@ const Index = (props) => {
                             <Typography gutterBottom variant="h5" component="h2">
                               {product.name}
                             </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                              <Typography gutterBottom variant="textPrimary" component="p">
+                            <div variant="body2">
+                              <Typography gutterBottom color="textPrimary" component="p">
                                 {product.category}
                               </Typography>
-                              <Typography gutterBottom variant="textSecondary" component="p">
+                              <Typography gutterBottom component="p">
                                 $ {product.cost}
                               </Typography>
-                            </Typography>
+                            </div>
                           </CardContent>
                         </CardActionArea>
                         <CardActions>
@@ -77,8 +76,14 @@ const Index = (props) => {
             </Grid>
           </Grid>
         </Grid>
-      </Typography>
-      <ModalComponent open={open} setOpen={setOpen} handleModal={handleModal} product={product} />
+      </div>
+      <ModalComponent
+        open={open}
+        setOpen={setOpen}
+        handleModal={handleModal}
+        product={product}
+        productRedeemAction={productRedeemAction}
+      />
     </div>
   );
 };
@@ -92,6 +97,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   getProductsAction,
+  productRedeemAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
