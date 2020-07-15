@@ -6,13 +6,14 @@ import Fade from "@material-ui/core/Fade";
 import { CardMedia, CardActions, Button } from "@material-ui/core";
 
 export const ModalComponent = (props) => {
-  const { open, setOpen, handleModal, product, productRedeemAction } = props;
+  const { open, setOpen, handleModal, product, productRedeemAction, toast } = props;
   const classes = useStyles();
   const redeem = () => {
     const productId = product._id;
     console.log(product);
     productRedeemAction(product);
     setOpen(!open);
+    toast.success("Product redeemed!!");
   };
   return (
     <div>

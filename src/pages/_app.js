@@ -9,6 +9,7 @@ import Landing from "../components/landing/Landing";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 import { createWrapper } from "next-redux-wrapper";
+import "react-toastify/scss/main.scss";
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {

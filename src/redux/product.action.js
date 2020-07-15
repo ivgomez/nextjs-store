@@ -8,6 +8,12 @@ export const setLoading = (isLoading) => {
   };
 };
 
+export const getUserDataAction = () => async (dispatch) => {
+  dispatch(setLoading(true));
+  const res = await ProductService.getUserData();
+  dispatch({ type: types.GET_USER_DATA, payload: res.data });
+};
+
 export const getProductsAction = () => async (dispatch) => {
   dispatch(setLoading(true));
   const res = await ProductService.getAllProducts();
@@ -24,4 +30,21 @@ export const productRedeemAction = (product) => async (dispatch) => {
   dispatch(setLoading(true));
   //const res = await ProductService.productRedeem(productId);
   dispatch({ type: types.PRODUCT_REDEEM, payload: product });
+};
+
+export const productPointsAction = (amount) => async (dispatch) => {
+  dispatch(setLoading(true));
+  //const res = await ProductService.productPoints(amount);
+  //dispatch({ type: types.PRODUCT_POINTS, payload: res.data });
+  dispatch({ type: types.PRODUCT_POINTS, payload: amount });
+};
+
+export const productPointsPlusAction = (amount) => async (dispatch) => {
+  dispatch(setLoading(true));
+  dispatch({ type: types.PRODUCT_POINTS_PLUS, payload: amount });
+};
+
+export const resetStateAction = () => async (dispatch) => {
+  dispatch(setLoading(true));
+  dispatch({ type: types.RESET_STATE });
 };

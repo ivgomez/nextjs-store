@@ -13,6 +13,7 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { ModalComponent } from "../components/ModalComponent";
+import { ToastContainer, toast } from "react-toastify";
 
 const Index = (props) => {
   const { isLoading, getProductsAction, productRedeemAction, products } = props;
@@ -34,6 +35,17 @@ const Index = (props) => {
         <title>Store</title>
       </Head>
       <div>
+        <ToastContainer
+          position="top-right"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Grid container justify="center" spacing={5}>
@@ -83,6 +95,7 @@ const Index = (props) => {
         handleModal={handleModal}
         product={product}
         productRedeemAction={productRedeemAction}
+        toast={toast}
       />
     </div>
   );

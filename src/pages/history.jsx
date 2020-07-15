@@ -17,7 +17,6 @@ const History = (props) => {
   useEffect(() => {
     getProductsHistoryAction();
   }, [getProductsHistoryAction]);
-  console.log("products:", products);
   return (
     <div className="container">
       <Head>
